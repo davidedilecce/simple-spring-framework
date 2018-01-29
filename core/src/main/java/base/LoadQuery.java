@@ -2,7 +2,7 @@ package base;
 
 import java.util.List;
 
-public class Query {
+public class LoadQuery {
 
     private List<Filter> filters;
 

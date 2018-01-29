@@ -7,6 +7,6 @@ public interface BaseRepository<T> {
     void save(T obj);
     void delete(T obj);
     T get(Object id);
-    List<T> find(Query q);
+    List<T> find(LoadQuery q);
 
 }
