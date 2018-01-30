@@ -1,0 +1,14 @@
+<hibernate-mapping>
+    <class name="model.Car" table="cars">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="description" type="string">
+            <column name="description" length="100" not-null="true" />
+        </property>
+        <property name="year" type="integer">
+            <column name="year" length="20" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

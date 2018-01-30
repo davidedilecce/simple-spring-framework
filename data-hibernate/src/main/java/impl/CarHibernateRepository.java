@@ -1,11 +1,11 @@
 package impl;
 
 import base.LoadQuery;
-import hibernate.HibernateUtils;
 import model.Car;
 import model.repositories.CarRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import utils.HibernateUtils;
 
 import java.util.List;
 
