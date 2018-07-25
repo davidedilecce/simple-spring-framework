@@ -1,5 +1,19 @@
-<html>
-<body>
-Ciao mondo!!!!
-</body>
-</html>
+#parse("../shared/header.vm")
+
+<div class="container-fluid">
+    <div class="col-xs-6 col-xs-offset-3 m-t-40">
+        <form action="${base}/save" method="post">
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" class="form-control" id="name" placeholder="Nome">
+            </div>
+            <div class="form-group">
+                <label for="surname">Cognome</label>
+                <input type="text" class="form-control" id="surname" placeholder="Cognome">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</div>
+
+#parse("../shared/footer.vm")
