@@ -1,18 +1,55 @@
 #parse("../shared/header.vm")
 
 <div class="container-fluid">
+
     <div class="col-xs-6 col-xs-offset-3 m-t-40">
-        <form action="${base}/save" method="post">
-            <div class="form-group">
-                <label for="name">Nome</label>
-                <input type="text" class="form-control" id="name" placeholder="Nome">
-            </div>
-            <div class="form-group">
-                <label for="surname">Cognome</label>
-                <input type="text" class="form-control" id="surname" placeholder="Cognome">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+
+        Filtra per nome
+        <input type="text" name="filterName" />
+        <br>
+        <br>
+
+        <table class="table table-hover" id="personsTable">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Nome</td>
+                    <td>Sesso</td>
+                    <td>Et&agrave;</td>
+                    <td>Azioni</td>
+                </tr>
+            </thead>
+            <tbody>
+            #foreach($item in $list)
+                <tr data-id="$item.id">
+                    <td>$item.id</td>
+                    <td>$item.name</td>
+                    <td>$item.surname</td>
+                    <td>$item.age</td>
+                    <td>
+                        <a href="javascript:;" class="removePerson" data-id="$item.id">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            #end
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3 m-t-40">
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" name="name" placeholder="Nome">
+        </div>
+        <div class="form-group">
+            <label for="surname">Cognome</label>
+            <input type="text" class="form-control" name="surname" placeholder="Cognome">
+        </div>
+        <div class="form-group">
+            <label for="surname">Et&agrave;</label>
+            <input type="number" class="form-control" name="age" placeholder="Et&agrave;">
+        </div>
+        <button type="button" class="btn btn-default" id="savePersonButton">Submit</button>
     </div>
 </div>
 
