@@ -27,6 +27,8 @@
         </property>
 
         <mapping resource = "hibernate.mapping/Person.hbm.xml"/>
+        <mapping resource = "hibernate.mapping/Address.hbm.xml"/>
+        <mapping resource = "hibernate.mapping/Order.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

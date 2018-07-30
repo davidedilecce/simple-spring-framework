@@ -4,15 +4,16 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name = "domain.Person" table = "PERSON">
+    <class name = "domain.Address" table = "ADDRESS">
 
         <id name="id" type = "java.lang.Integer" column="id">
             <generator class="native"/>
         </id>
 
-        <property name = "name" column = "name" type = "string"/>
-        <property name = "surname" column = "surname" type = "string"/>
-        <property name = "age" column="age" type="int"/>
+        <property name = "city" column = "city" type = "string"/>
+        <property name = "nation" column = "nation" type = "string"/>
+
+        <many-to-one name="person" class="domain.Person" column="personId" lazy="false" />
 
     </class>
 </hibernate-mapping>

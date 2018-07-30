@@ -1,0 +1,23 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name = "domain.Order" table = "ORDERS">
+
+        <id name="id" type = "java.lang.Integer" column="id">
+            <generator class="native"/>
+        </id>
+
+        <property name = "date" column = "date" />
+        <property name = "notes" column = "notes" />
+        <property name = "total" column = "total" />
+
+        <many-to-one name="person" class="domain.Person" column="personId" lazy="false" />
+        <many-to-one name="address" class="domain.Address" column="addressId" lazy="false" />
+
+    </class>
+
+</hibernate-mapping>

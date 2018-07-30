@@ -63,4 +63,57 @@ public class MainController {
 
     }
 
+    /* ADDRESS */
+
+    @RequestMapping(value = "generateAddress", method = RequestMethod.GET)
+    public @ResponseBody BaseResponse generateAddress() {
+        try {
+            mainFacade.generateAddress();
+            return new OkResponse();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ErrorResponse(ErrorResponseCode.GENERIC_ERROR);
+        }
+
+    }
+
+    @RequestMapping(value = "getAddress", method = RequestMethod.GET)
+    public @ResponseBody BaseResponse getAddress() {
+        try {
+            return new OkResponse(mainFacade.getAddress());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ErrorResponse(ErrorResponseCode.GENERIC_ERROR);
+        }
+
+    }
+
+
+
+    /* ORDER */
+
+    @RequestMapping(value = "generateOrder", method = RequestMethod.GET)
+    public @ResponseBody BaseResponse generateOrder() {
+        try {
+            mainFacade.generateOrder();
+            return new OkResponse();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ErrorResponse(ErrorResponseCode.GENERIC_ERROR);
+        }
+
+    }
+
+    @RequestMapping(value = "getOrder", method = RequestMethod.GET)
+    public @ResponseBody BaseResponse getOrder() {
+        try {
+            return new OkResponse(mainFacade.getOrder());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ErrorResponse(ErrorResponseCode.GENERIC_ERROR);
+        }
+
+    }
+
+
 }

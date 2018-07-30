@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     $("#savePersonButton").on("click", function() {
 
+        var id = $("[name=id]").val();
         var name = $("[name=name]").val();
         var surname = $("[name=surname]").val();
         var age = parseInt($("[name=age]").val());
@@ -24,27 +25,20 @@ $(document).ready(function() {
         $.ajax({
             url: BASE + "/save",
             type: "POST",
-            data: JSON.stringify({name: name, surname: surname, age: age}),
+            data: JSON.stringify({id: id, name: name, surname: surname, age: age}),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             dataType: "json",
             success: function(resp, status, xhr) {
-                $("#personsTable").find("tbody").append('' +
-                    '<tr>' +
-                        '<td>' + resp.value.id + '</td>' +
-                        '<td>' + resp.value.name + '</td>' +
-                        '<td>' + resp.value.surname + '</td>' +
-                        '<td>' + resp.value.age + '</td>' +
-                        '<td></td>' +
-                    '</tr>');
+                location.reload()
             },
             error(xhr,status,error) {
             }
         });
 
-    })
+    });
 
 
     $(".removePerson").on("click", function() {
@@ -64,6 +58,22 @@ $(document).ready(function() {
         });
     });
 
+    $(".updatePerson").on("click", function() {
+
+        var tr = $("tr[data-id=" + $(this).attr("data-id") + "]");
+
+        var id = $(this).attr("data-id");
+        var name = $(tr).find("td:nth(1)").text();
+        var surname = $(tr).find("td:nth(2)").text();
+        var age = $(tr).find("td:nth(3)").text();
+
+        $("[name=id]").val(id);
+        $("[name=name]").val(name);
+        $("[name=surname]").val(surname);
+        $("[name=age]").val(age);
+
+    });
+
     $("[name=filterName]").on("input", function() {
 
         let name = $(this).val();
@@ -80,6 +90,7 @@ $(document).ready(function() {
                         '<td>' + resp.value[i].name + '</td>' +
                         '<td>' + resp.value[i].surname + '</td>' +
                         '<td>' + resp.value[i].age + '</td>' +
+                        '<td></td>' +
                         '<td></td>' +
                         '</tr>');
                 }

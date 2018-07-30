@@ -16,7 +16,8 @@
                     <td>Nome</td>
                     <td>Sesso</td>
                     <td>Et&agrave;</td>
-                    <td>Azioni</td>
+                    <td>Rimuovi</td>
+                    <td>Modifica</td>
                 </tr>
             </thead>
             <tbody>
@@ -31,12 +32,21 @@
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
                     </td>
+                    <td>
+                        <a href="javascript:;" class="updatePerson" data-id="$item.id">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                    </td>
                 </tr>
             #end
             </tbody>
         </table>
     </div>
     <div class="col-xs-6 col-xs-offset-3 m-t-40">
+        <div class="form-group">
+            <label for="name">Id</label>
+            <input type="text" readonly class="form-control" name="id" placeholder="id">
+        </div>
         <div class="form-group">
             <label for="name">Nome</label>
             <input type="text" class="form-control" name="name" placeholder="Nome">
