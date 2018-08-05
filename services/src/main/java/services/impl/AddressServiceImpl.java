@@ -1,25 +1,27 @@
 package services.impl;
 
 import domain.Address;
-import hibernate.AddressDAO;
+import hibernate.HibernateDAO;
+import hibernate.exception.EntityNullException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import services.AddressService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AddressServiceImpl implements AddressService {
 
     @Autowired
-    private AddressDAO addressDao;
+    private HibernateDAO hibernateDAO;
 
-    public void save(Address address) {
-        addressDao.save(address);
+    public void save(Address address) throws EntityNullException {
+        hibernateDAO.save(Optional.of(address));
     }
 
     public List<Address> find() {
-        return addressDao.find();
+        return (List<Address>) hibernateDAO.find(null, Address.class);
     }
 
 }

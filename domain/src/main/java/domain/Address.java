@@ -3,7 +3,7 @@ package domain;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
 
-public class Address extends Entity {
+public class Address extends HibernateEntity {
 
     private String city;
     private String nation;

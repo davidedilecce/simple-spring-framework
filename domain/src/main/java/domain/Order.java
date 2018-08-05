@@ -4,7 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
 import java.util.Date;
 
-public class Order extends Entity {
+public class Order extends HibernateEntity {
 
     private Date date;
 

@@ -5,6 +5,8 @@ import domain.Order;
 import domain.Person;
 import fe.exceptions.NameNotSettedException;
 import fe.exceptions.SurnameNotSettedException;
+import hibernate.exception.EntityNullException;
+import hibernate.exception.EntityRowNotPresentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -28,10 +30,7 @@ public class MainFacade {
     private OrderService orderService;
 
 
-
-
-
-    public Person savePerson(Person person) throws NameNotSettedException, SurnameNotSettedException {
+    public Person savePerson(Person person) throws NameNotSettedException, SurnameNotSettedException, EntityNullException {
 
         if (StringUtils.isEmpty(person.getName())) {
             throw new NameNotSettedException();
@@ -50,11 +49,11 @@ public class MainFacade {
         return personService.getAll(name);
     }
 
-    public void deletePerson(Integer id) {
+    public void deletePerson(Integer id) throws EntityRowNotPresentException {
         personService.delete(id);
     }
 
-    public void generateAddress() {
+    public void generateAddress() throws EntityNullException {
 
         Address address = new Address();
 
@@ -70,7 +69,7 @@ public class MainFacade {
         return addressService.find().get(0);
     }
 
-    public void generateOrder() {
+    public void generateOrder() throws EntityNullException {
 
         Order order = new Order();
 

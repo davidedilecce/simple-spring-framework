@@ -1,6 +1,6 @@
 package domain;
 
-public class Entity {
+public class HibernateEntity {
 
     private Integer id;
 

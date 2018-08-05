@@ -1,6 +1,6 @@
 package domain;
 
-public class Person extends Entity {
+public class Person extends HibernateEntity {
 
     private String name;
     private String surname;
