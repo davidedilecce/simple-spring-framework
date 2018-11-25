@@ -13,6 +13,8 @@ import org.springframework.util.StringUtils;
 import services.AddressService;
 import services.OrderService;
 import services.PersonService;
+import services.StudentService;
+import testMongoDomain.Student;
 
 import java.util.Date;
 import java.util.List;
@@ -28,6 +30,9 @@ public class MainFacade {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private StudentService studentService;
 
 
     public Person savePerson(Person person) throws NameNotSettedException, SurnameNotSettedException, EntityNullException {
@@ -87,4 +92,21 @@ public class MainFacade {
         return orderService.find().get(0);
     }
 
+    public Student getStudent(String id) {
+        return studentService.getById(id);
+    }
+
+    public void saveStudent() {
+        Student student = new Student();
+        student.setSurname("DI LECCE");
+        student.setName("DAVIDE");
+        studentService.save(student);
+    }
+
+    public Student studentUpdate(String id) {
+        Student student = studentService.getById(id);
+        student.setName("ANNA");
+        studentService.save(student);
+        return student;
+    }
 }

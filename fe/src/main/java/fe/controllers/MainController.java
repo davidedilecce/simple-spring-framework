@@ -116,4 +116,42 @@ public class MainController {
     }
 
 
+
+
+    /* test mongo */
+    @RequestMapping(value = "student", method = RequestMethod.GET)
+    public @ResponseBody BaseResponse getStudent(String id) {
+        try {
+            return new OkResponse(mainFacade.getStudent(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ErrorResponse(ErrorResponseCode.GENERIC_ERROR);
+        }
+
+    }
+
+    @RequestMapping(value = "studentUpdate", method = RequestMethod.GET)
+    public @ResponseBody BaseResponse studentUpdate(String id) {
+        try {
+            return new OkResponse(mainFacade.studentUpdate(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ErrorResponse(ErrorResponseCode.GENERIC_ERROR);
+        }
+
+    }
+
+    @RequestMapping(value = "student", method = RequestMethod.POST)
+    public @ResponseBody BaseResponse saveStudent() {
+        try {
+            mainFacade.saveStudent();
+            return new OkResponse();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ErrorResponse(ErrorResponseCode.GENERIC_ERROR);
+        }
+
+    }
+
+
 }

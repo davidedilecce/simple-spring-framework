@@ -26,6 +26,11 @@
             <artifactId>hibernate</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>webapp</groupId>
+            <artifactId>mongodb</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     
 </project>

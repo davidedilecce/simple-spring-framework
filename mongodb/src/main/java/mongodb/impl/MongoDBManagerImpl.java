@@ -4,9 +4,9 @@ import com.mongodb.*;
 import domain.MongoEntity;
 import mongodb.MongoDBManager;
 import mongodb.utils.MongoUtils;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Repository;
 
-import java.net.UnknownHostException;
 import java.util.Optional;
 
 /**
@@ -16,17 +16,38 @@ import java.util.Optional;
 public class MongoDBManagerImpl implements MongoDBManager {
 
     @Override
-    public Optional<? extends MongoEntity> getById(String id, Class<? extends MongoEntity> className) throws UnknownHostException {
-        MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://" + MongoUtils.DB_NAME + ":" + MongoUtils.PORT + ""));
-        DB database = mongoClient.getDB(MongoUtils.DB_NAME);
-        DBCollection collection = database.getCollection(className.getName());
-        DBObject query = new BasicDBObject("_id", id);
+    public DBObject getById(String id, Class<? extends MongoEntity> className) {
+
+        DB database = MongoUtils.mongoClient.getDB(MongoUtils.DB_NAME);
+        DBCollection collection = database.getCollection(className.getSimpleName().toLowerCase());
+        DBObject query = new BasicDBObject("_id", new ObjectId(id));
         DBCursor cursor = collection.find(query);
-        DBObject jo = cursor.one();
-        while (cursor.hasNext()) {
-            DBObject obj = cursor.next();
-            //todo
-        }
-        return null;
+        DBObject dbObject = cursor.one();
+
+        return dbObject;
+
     }
+
+    @Override
+    public void save(DBObject object, Optional<? extends MongoEntity> entity, Class<? extends MongoEntity> className) {
+
+        if (object == null) {
+            return;
+        }
+
+        DB database = MongoUtils.mongoClient.getDB(MongoUtils.DB_NAME);
+        DBCollection collection = database.getCollection(className.getSimpleName().toLowerCase());
+
+        Object id = object.get("_id");
+
+        if (id == null) {
+            collection.insert(object);
+            entity.get().setId(object.get("_id").toString());
+        } else {
+            BasicDBObject searchQuery = new BasicDBObject().append("_id", new ObjectId(String.valueOf(id)));
+            collection.update(searchQuery, object);
+        }
+
+    }
+
 }

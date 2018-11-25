@@ -1,8 +1,8 @@
 package mongodb;
 
+import com.mongodb.DBObject;
 import domain.MongoEntity;
 
-import java.net.UnknownHostException;
 import java.util.Optional;
 
 /**
@@ -10,6 +10,8 @@ import java.util.Optional;
  */
 public interface MongoDBManager {
 
-    Optional<? extends MongoEntity> getById(String id, Class<? extends MongoEntity> className) throws UnknownHostException;
+    DBObject getById(String id, Class<? extends MongoEntity> className);
+
+    void save(DBObject object, Optional<? extends MongoEntity> entity, Class<? extends MongoEntity> className);
 
 }
