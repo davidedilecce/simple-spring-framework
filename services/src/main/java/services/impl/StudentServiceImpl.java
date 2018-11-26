@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import services.StudentService;
 import testMongoDomain.Student;
+import utils.query.QueryBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -36,6 +39,21 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void save(Student student) {
         mongoDBManager.save(mapping.fromEntityToMongo(Optional.of(student)), Optional.of(student), Student.class);
+    }
+
+    @Override
+    public List<Student> find(QueryBuilder queryBuilder) {
+        List<Student> students = new ArrayList<>();
+        List<DBObject> dbObjects = mongoDBManager.find(queryBuilder, Student.class);
+        for (DBObject dbObject : dbObjects) {
+            students.add(((Student) mapping.fromMongoToEntity(dbObject).get()));
+        }
+        return students;
+    }
+
+    @Override
+    public void delete(Object id) {
+        mongoDBManager.delete(id, Student.class);
     }
 
 }

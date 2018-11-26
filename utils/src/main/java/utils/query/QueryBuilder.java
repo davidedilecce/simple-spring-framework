@@ -22,12 +22,14 @@ public class QueryBuilder {
         return this;
     }
 
-    public void addDisjunction(Disjunction disjunction) {
+    public QueryBuilder addDisjunction(Disjunction disjunction) {
         this.getFilters().add(new Filter("disjunction", disjunction, Filter.DISJUNCTION));
+        return this;
     }
 
-    public void addConjunction(Conjunction conjunction) {
+    public QueryBuilder addConjunction(Conjunction conjunction) {
         this.getFilters().add(new Filter("conjunction", conjunction, Filter.CONJUNCTION));
+        return this;
     }
 
 

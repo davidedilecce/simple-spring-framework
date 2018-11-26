@@ -2,7 +2,9 @@ package mongodb;
 
 import com.mongodb.DBObject;
 import domain.MongoEntity;
+import utils.query.QueryBuilder;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -14,4 +16,7 @@ public interface MongoDBManager {
 
     void save(DBObject object, Optional<? extends MongoEntity> entity, Class<? extends MongoEntity> className);
 
+    List<DBObject> find(QueryBuilder queryBuilder, Class<? extends MongoEntity> className);
+
+    void delete(Object id, Class<? extends MongoEntity> className);
 }

@@ -130,6 +130,17 @@ public class MainController {
 
     }
 
+    @RequestMapping(value = "student/find", method = RequestMethod.GET)
+    public @ResponseBody BaseResponse find() {
+        try {
+            return new OkResponse(mainFacade.findStudents());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ErrorResponse(ErrorResponseCode.GENERIC_ERROR);
+        }
+
+    }
+
     @RequestMapping(value = "studentUpdate", method = RequestMethod.GET)
     public @ResponseBody BaseResponse studentUpdate(String id) {
         try {
@@ -145,6 +156,18 @@ public class MainController {
     public @ResponseBody BaseResponse saveStudent() {
         try {
             mainFacade.saveStudent();
+            return new OkResponse();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ErrorResponse(ErrorResponseCode.GENERIC_ERROR);
+        }
+
+    }
+
+    @RequestMapping(value = "studentDelete", method = RequestMethod.POST)
+    public @ResponseBody BaseResponse studentDelete() {
+        try {
+            mainFacade.studentDelete();
             return new OkResponse();
         } catch (Exception e) {
             e.printStackTrace();

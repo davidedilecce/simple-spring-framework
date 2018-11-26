@@ -15,6 +15,9 @@ import services.OrderService;
 import services.PersonService;
 import services.StudentService;
 import testMongoDomain.Student;
+import utils.query.Disjunction;
+import utils.query.Filter;
+import utils.query.QueryBuilder;
 
 import java.util.Date;
 import java.util.List;
@@ -108,5 +111,16 @@ public class MainFacade {
         student.setName("ANNA");
         studentService.save(student);
         return student;
+    }
+
+    public List<Student> findStudents() {
+        Disjunction disjunction = new Disjunction();
+        disjunction.getFilters().add(new Filter("name", "Anna", Filter.LIKE_ANYWHERE));
+        disjunction.getFilters().add(new Filter("name", "Davide", Filter.LIKE_ANYWHERE));
+        return studentService.find(new QueryBuilder().addDisjunction(disjunction));
+    }
+
+    public void studentDelete() {
+        studentService.delete("5bfb2a6777c804e292ab3ed0");
     }
 }
